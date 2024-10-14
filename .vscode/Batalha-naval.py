@@ -44,5 +44,3 @@ def imprimir_tabuleiro(tabuleiro):
         for x in linha:
             print(x, end=" ")  # Imprime cada célula da linha com espaço
         print()  # Quebra de linha após cada linha
-
-imp
