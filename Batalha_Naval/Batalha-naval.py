@@ -2,7 +2,24 @@ import random
 import string 
 import time
 import os 
-
+trofeu = """ 
+        ⣠⣤⣶⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⣴⣿⢿⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀ 
+⠀⠀⢐⣿⣿⣿⣟⣤⠈⠉⠉⠉⣿⣿⡟⡦⠀⠀⠀⠀ 
+⠀⠀⠘⡾⣿⣿⣿⣿⡧⢸⠀⠀⣿⣾⢃⡞⠀⠀⠀⠀ 
+⠀⠀⠀⠻⣜⡿⣿⠅⠧⢷⡇⠐⣛⠡⢼⠃⠀⠀⠀⠀ 
+⠀⠀⠀⠀⢿⣿⣶⠜⣿⢹⣜⠐⣼⢴⡟⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⢸⡿⢻⣿⣆⣿⣮⢴⣽⡿⠁⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⢝⢷⣿⣿⣿⡿⠸⣿⠁⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⠈⢿⣿⣿⣿⠏⢻⡏⠀⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⠀⢸⣿⣿⠏⣀⣿⡇⠀⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⠀⢸⡿⢃⣄⢿⣶⠀⠀⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⢀⣜⡵⠂⠀⢠⢿⣧⠀⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⣤⡉⠛⠋⠐⠛⠛⣻⣦⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⠻⠏⠉⣴⠐⡀⠭⠻⢿⡡⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠈⠐⠠⣄⣀⣀⣀⢤⠤⠞⠁⠀⠀⠀         
+                                                             """
 def criar_tabuleiro():
     return [["-" for _ in range(10)] for _ in range(10)]
 
@@ -48,6 +65,13 @@ def ataque(player, navios, oponente):
         navios[jogada_linha][jogada_coluna] = "O"
     time.sleep(1)  # Pausa antes de continuar para o próximo jogador
 
+
+def verificar_tabuleiro(tabuleiro_player):
+    for linha in tabuleiro_player:
+        if "N" in linha or "G" in linha:
+            return False  
+    return True 
+    
 
 # Navios de uma posição
 def adicionar_navios(tabuleiro_player,navios_pequenos = 5, navios_grandes= 3): 
@@ -100,47 +124,23 @@ while True:
     print("\nTabuleiro de ataque Player1")
     imprimir_tabuleiro(ataque_player1)
 
-    ataque("player1",ataque_player1, tabuleiro_player2)
+    ataque("player1", ataque_player1, tabuleiro_player2)
+    
+    if verificar_tabuleiro(tabuleiro_player2):
+        print(f"Player 1 venceu!\n{trofeu}")
+        break  
     
     limpar_terminal()
     time.sleep(2)
+    
     print("\nTabuleiro de navios Player2")
     imprimir_tabuleiro(tabuleiro_player2)
 
     print("\nTabuleiro de ataque Player2")
     imprimir_tabuleiro(ataque_player2)
+
+    ataque("player2", ataque_player2, tabuleiro_player1)
     
-    ataque("player2",ataque_player2, tabuleiro_player1)
-    
-# print("""
-        ##########################          
-        ##########################          
-   #####################################    
- #########################################  
-####      ######################       #### 
-###       ######################        ### 
-##        ######################        ### 
-###     ##########################      ### 
-###    ############################    #### 
- ###   ### #################### ###    ###  
- ####   ### ################## ####  ####   
-   ####  ######################### #####    
-    ######## ################ #########     
-      ######  ##############   ######       
-               ############                 
-                 ########                   
-                   ####                     
-                   ####                     
-                   ####                     
-                   ####                     
-               ############                 
-            ##################              
-            ##################              
-            ###            ###              
-            ###            ###              
-            ###            ###              
-            ##################              
-            ##################              
-          ######################            
-         ########################           
-#      """)
+    if verificar_tabuleiro(tabuleiro_player1):
+        print(f"Player 2 venceu!\n {trofeu}")
+        break  
